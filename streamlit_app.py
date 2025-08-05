@@ -17,14 +17,24 @@ import statsmodels.api as sm
 # ---------- Custom Styling (Blue Theme) ----------
 st.markdown(
     """
-  <style>
-    .stApp {
-        background-color: #fce4ec;  /* Light Pink */
-    }
-    .stSidebar {
-        background-color: #f8bbd0;  /* Sidebar Pink */
-    }
-</style>
+    <style>
+        .stApp {
+            background-color: #e3f2fd;  /* Light Blue Background */
+        }
+        section[data-testid="stSidebar"] {
+            background-color: #bbdefb;  /* Lighter Blue for Sidebar */
+        }
+        h1, h2, h3, .stMarkdown, .stTextInput label, .stSelectbox label, .stNumberInput label {
+            color: #0d47a1;  /* Deep Blue Text */
+        }
+        .stButton>button {
+            background-color: #1976d2;
+            color: white;
+        }
+        .stDataFrame, .stTable {
+            background-color: white;
+        }
+    </style>
     """,
     unsafe_allow_html=True
 )
