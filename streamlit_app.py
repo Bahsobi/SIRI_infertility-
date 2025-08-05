@@ -225,6 +225,10 @@ user_input = pd.DataFrame([{
 
 
 
+
+
+
+
 # ---------- Prediction ----------
 prediction = model.predict(user_input)[0]
 probability = model.predict_proba(user_input)[0][1]
@@ -233,21 +237,21 @@ odds_value = probability / (1 - probability)
 # ---------- Display Result ----------
 if prediction == 1:
     st.error(f"""
-        ⚠️ **Prediction: Diabetes/Prediabetes**
+        ⚠️ **Prediction: At Risk of Female Infertility**
 
         🧮 **Probability:** {probability:.2%}  
         🎲 **Odds:** {odds_value:.2f}
     """)
 else:
     st.success(f"""
-        ✅ **Prediction: No Diabetes/Prediabetes**
+        ✅ **Prediction: Not at Risk of Female Infertility**
 
         🧮 **Probability:** {probability:.2%}  
         🎲 **Odds:** {odds_value:.2f}
     """)
 
 # ---------- Show Tables ----------
-st.subheader("📊 Odds Ratios for Diabetes/Prediabetes (Logistic Regression)")
+st.subheader("📊 Odds Ratios for Female Infertility (Logistic Regression)")
 st.dataframe(odds_df)
 
 st.subheader("💡 Feature Importances (XGBoost)")
@@ -259,10 +263,6 @@ fig, ax = plt.subplots()
 sns.barplot(x='Importance', y='Feature', data=importance_df, ax=ax)
 st.pyplot(fig)
 
-
-
-
-# ---------- Quartile Odds Ratio for eGDR ----------
 # ---------- Quartile Odds Ratio for SIRI ----------
 st.subheader("📉 Odds Ratios for Female Infertility by SIRI Quartiles")
 df_siri = df[['SIRI', target]].copy()
@@ -294,15 +294,14 @@ ax3.axhline(1, linestyle='--', color='gray')
 ax3.set_title("Odds Ratios for Female Infertility by SIRI Quartiles")
 st.pyplot(fig3)
 
-
 # ---------- Summary ----------
 with st.expander("📋 Data Summary"):
     st.write(df.describe())
 
-st.subheader("🎯 Diabetes/Prediabetes Distribution")
+st.subheader("🎯 Female Infertility Distribution")
 fig2, ax2 = plt.subplots()
 df[target].value_counts().plot.pie(
-    autopct='%1.1f%%', labels=['No Diabetes/Prediabetes', 'Diabetes/Prediabetes'], ax=ax2, colors=["#81c784", "#e57373"])
+    autopct='%1.1f%%', labels=['No Infertility', 'Infertility'], ax=ax2, colors=["#81c784", "#e57373"])
 ax2.set_ylabel("")
 st.pyplot(fig2)
 
