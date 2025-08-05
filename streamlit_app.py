@@ -259,14 +259,18 @@ fig, ax = plt.subplots()
 sns.barplot(x='Importance', y='Feature', data=importance_df, ax=ax)
 st.pyplot(fig)
 
-# ---------- Quartile Odds Ratio for eGDR ----------
-st.subheader("📉 Odds Ratios for Diabetes/Prediabetes by eGDR Quartiles")
-df_egdr = df[['eGDR', target]].copy()
-df_egdr['eGDR_quartile'] = pd.qcut(df_egdr['eGDR'], 4, labels=['Q1', 'Q2', 'Q3', 'Q4'])
 
-X_q = pd.get_dummies(df_egdr['eGDR_quartile'], drop_first=True)
+
+
+# ---------- Quartile Odds Ratio for eGDR ----------
+# ---------- Quartile Odds Ratio for SIRI ----------
+st.subheader("📉 Odds Ratios for Female Infertility by SIRI Quartiles")
+df_siri = df[['SIRI', target]].copy()
+df_siri['SIRI_quartile'] = pd.qcut(df_siri['SIRI'], 4, labels=['Q1', 'Q2', 'Q3', 'Q4'])
+
+X_q = pd.get_dummies(df_siri['SIRI_quartile'], drop_first=True)
 X_q = sm.add_constant(X_q).astype(float)
-y_q = df_egdr[target].astype(float)
+y_q = df_siri[target].astype(float)
 
 model_q = sm.Logit(y_q, X_q).fit(disp=False)
 ors = np.exp(model_q.params)
@@ -287,8 +291,9 @@ st.dataframe(or_df.set_index('Quartile').style.format("{:.2f}"))
 fig3, ax3 = plt.subplots()
 sns.pointplot(data=or_df, x='Quartile', y='Odds Ratio', join=False, capsize=0.2, errwidth=1.5)
 ax3.axhline(1, linestyle='--', color='gray')
-ax3.set_title("Odds Ratios for Diabetes/Prediabetes by eGDR Quartiles")
+ax3.set_title("Odds Ratios for Female Infertility by SIRI Quartiles")
 st.pyplot(fig3)
+
 
 # ---------- Summary ----------
 with st.expander("📋 Data Summary"):
