@@ -61,45 +61,38 @@ def load_data():
     df = pd.read_excel(url)
 
 
-
-
+    
     # Mapping categorical values
-   df['Race_Ethnicity'] = df['Race_Ethnicity'].map({
-    1: "Mexican American",
-    2: "Other Hispanic",
-    3: "Non-Hispanic White",
-    4: "Non-Hispanic Black",
-    6: "Non-Hispanic Asian",
-    7: "Other Race - Including Multi-Racial"
-})
+    df['Race_Ethnicity'] = df['Race_Ethnicity'].map({
+        1: "Mexican American",
+        2: "Other Hispanic",
+        3: "Non-Hispanic White",
+        4: "Non-Hispanic Black",
+        6: "Non-Hispanic Asian",
+        7: "Other Race - Including Multi-Racial"
+    })
 
-df['Education_Level'] = df['Education_Level'].map({
-    1: "Less than 9th grade",
-    2: "9-11th grade",
-    3: "High school graduate or equivalent",
-    4: "Some college or AA degree",
-    5: "College graduate or above"
-})
+    df['Education_Level'] = df['Education_Level'].map({
+        1: "Less than 9th grade",
+        2: "9-11th grade",
+        3: "High school graduate or equivalent",
+        4: "Some college or AA degree",
+        5: "College graduate or above"
+    })
 
-df['Hypertension'] = df['Hypertension'].map({
-    0: "No",
-    1: "Yes"
-})
+    df['Hypertension'] = df['Hypertension'].map({
+        0: "No",
+        1: "Yes"
+    })
 
-df['Diabetes_Status'] = df['Diabetes_Status'].map({
-    1: "Diabetes",
-    2: "Normal",
-})
-
-
-
-
+    df['Diabetes_Status'] = df['Diabetes_Status'].map({
+        1: "Diabetes",
+        2: "Healthy",  
+    })
 
     return df
 
 df = load_data()
-
-
 
 #################################################
 
