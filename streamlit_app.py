@@ -251,8 +251,7 @@ else:
     """)
 
 # ---------- Show Tables ----------
-st.subheader("📊 Odds Ratios for Female Infertility (Logistic Regression)")
-st.dataframe(odds_df)
+
 
 st.subheader("💡 Feature Importances (XGBoost)")
 st.dataframe(importance_df)
